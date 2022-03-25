@@ -8,7 +8,7 @@ export const ProfileMenu = () => {
 	}
 
 	return (
-		<ul className="absolute top-[120%] right-[-10%] p-6 shadow-sm border border-[#eee] rounded-lg text-black-800 flex flex-col gap-3 w-60 z-10">
+		<ul className="absolute top-[120%] right-[-10%] p-6 shadow-sm border border-[#eee] rounded-lg text-black-800 flex flex-col gap-3 w-60 z-10 bg-white">
 			<li className="flex justify-between items-center">
 				Dark mode
 				<span
