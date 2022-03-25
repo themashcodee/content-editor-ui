@@ -1,7 +1,7 @@
 import React from "react"
 import type { NextPage } from "next"
 import { Head, Header } from "components/core"
-import { Subheader } from "components/pages/home"
+import { Subheader, HomeBody } from "components/pages/home"
 
 const Home: NextPage = () => {
 	return (
@@ -11,6 +11,7 @@ const Home: NextPage = () => {
 			<main className="w-full flex flex-col h-screen">
 				<Header />
 				<Subheader />
+				<HomeBody />
 			</main>
 		</>
 	)
