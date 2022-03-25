@@ -1,20 +1,14 @@
+import React from "react"
 import type { NextPage } from "next"
-import Head from "next/head"
+import { Head, Header } from "components/core"
 
 const Home: NextPage = () => {
 	return (
 		<>
-			<Head>
-				<title>Content Editor</title>
-				<meta
-					name="description"
-					content="Content Editor - LRNR Interview assignement"
-				/>
-				<link rel="icon" href="/favicon.png" />
-			</Head>
+			<Head />
 
-			<main className="p-12">
-				<h1 className="text-4xl font-semibold">Content Editor</h1>
+			<main className="w-full flex flex-col h-screen">
+				<Header />
 			</main>
 		</>
 	)
