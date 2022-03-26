@@ -1,1 +1,1 @@
-export * from "./home-all-section"
+export * from "./main"
