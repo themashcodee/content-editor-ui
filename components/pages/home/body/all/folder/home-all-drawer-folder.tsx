@@ -12,7 +12,7 @@ import toast from "react-hot-toast"
 import { Component } from "types/common"
 
 type P = Folder & {
-	addItem: ({ name, parentId, type }: AddItemParams) => void
+	addItem: ({ name, parentId, type }: AddItemParams) => string | undefined
 }
 
 export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
@@ -24,13 +24,15 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 	function handleAddFile() {
 		const name = prompt("File Name")
 		if (!name) return toast.error("File name is required")
-		addItem({ parentId: id, name, type: "file" })
+		const errorMessage = addItem({ parentId: id, name, type: "file" })
+		if (errorMessage) return toast.error(errorMessage)
 		setShowChildren(true)
 	}
 	function handleAddFolder() {
 		const name = prompt("Folder Name")
 		if (!name) return toast.error("Folder name is required")
-		addItem({ parentId: id, name, type: "folder" })
+		const errorMessage = addItem({ parentId: id, name, type: "folder" })
+		if (errorMessage) return toast.error(errorMessage)
 		setShowChildren(true)
 	}
 
@@ -48,14 +50,14 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 				</span>
 
 				<div className="flex items-center gap-4">
-					<button onClick={handleAddFile}>
-						<AddIcon className="h-[16px]" />
+					<button aria-label="add file" onClick={handleAddFile}>
+						<AddIcon />
 					</button>
-					<button onClick={handleAddFolder}>
-						<AddFilledIcon className="h-[16px]" />
+					<button aria-label="add folder" onClick={handleAddFolder}>
+						<AddFilledIcon />
 					</button>
-					<button>
-						<DotMenuIcon className="h-[16px]" />
+					<button aria-label="folder options">
+						<DotMenuIcon />
 					</button>
 				</div>
 			</div>
@@ -63,9 +65,7 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 			{showChildren && (
 				<div className="pl-4">
 					{children
-						.sort((a, b) => {
-							return a.type === "file" ? 1 : -1
-						})
+						.sort((a) => (a.type === "file" ? 1 : -1))
 						.map((item) => {
 							return item.type === "file" ? (
 								<DrawerFile key={item.id} {...item} />

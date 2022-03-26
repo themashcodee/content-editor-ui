@@ -17,14 +17,14 @@ type P = {
 export const Tab: NamedExoticComponent<P> = memo(
 	({ selected, setSelectedTab, value }) => {
 		return (
-			<li
+			<button
 				onClick={() => setSelectedTab(value)}
 				className={`cursor-pointer h-full flex items-center px-5 ${
 					selected ? "border-b-2 border-red-400" : ""
 				}`}
 			>
 				{Capitalize(value)}
-			</li>
+			</button>
 		)
 	}
 )

@@ -11,7 +11,7 @@ export const Subheader = () => {
 
 	return (
 		<div className="flex px-8 h-12 shadow-sm">
-			<ul className="flex">
+			<div className="flex z-30">
 				<Tab
 					value="all"
 					selected={selectedTab === "all"}
@@ -33,10 +33,13 @@ export const Subheader = () => {
 					setSelectedTab={setSelectedTab}
 				/>
 
-				<span className="flex h-full items-center cursor-pointer">
+				<button
+					aria-label="sub header options"
+					className="flex h-full items-center cursor-pointer"
+				>
 					<DotMenuIcon className="w-[18px] h-[18px]" />
-				</span>
-			</ul>
+				</button>
+			</div>
 		</div>
 	)
 }

@@ -13,6 +13,8 @@ export function useDrawer() {
 	const [data, setData] = useState<(File | Folder)[]>([])
 
 	const addItem = ({ name, parentId, type }: AddItemParams) => {
+		if (!name.match(/^[a-zA-Zа-яА-Я0-9-_!]+$/)) return `Invalid ${type} name`
+
 		const itemId = nanoid()
 		const itemToAdd =
 			type === "file"
@@ -23,7 +25,8 @@ export function useDrawer() {
 
 		if (!parentId) {
 			const itemAreadyExist = newData.some((item) => item.name === name)
-			if (itemAreadyExist) return
+			if (itemAreadyExist)
+				return `A file/folder already exist with the name of ${name}`
 			newData.push(itemToAdd)
 			setData(newData)
 			return
@@ -31,7 +34,8 @@ export function useDrawer() {
 
 		const parentFolder = findFolder({ id: parentId, items: newData })
 		const itemAreadyExist = parentFolder?.children.some((i) => i.name === name)
-		if (itemAreadyExist) return
+		if (itemAreadyExist)
+			return `A file/folder already exist with the name of ${name}`
 
 		parentFolder?.children.push(itemToAdd)
 		setData(newData)

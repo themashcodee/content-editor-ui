@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect } from "react"
+import React, { MouseEvent } from "react"
 import { AddIcon, ExpandIcon, LeftDoubleArrowIcon } from "components/icons"
 import { DrawerFolder } from "../folder"
 import { DrawerFile } from "../file"
@@ -11,7 +11,8 @@ export const Drawer = () => {
 	function handleAddItem(e: MouseEvent<HTMLButtonElement>) {
 		const name = prompt("Folder Name")
 		if (!name) return toast.error("Folder name is required")
-		addItem({ parentId: "", name, type: "folder" })
+		const errorMessage = addItem({ parentId: "", name, type: "folder" })
+		if (errorMessage) toast.error(errorMessage)
 	}
 
 	return (
@@ -20,7 +21,7 @@ export const Drawer = () => {
 				<h3 className="font-semibold text-[#555]">FILES</h3>
 
 				<div className="flex items-center gap-4">
-					<button onClick={handleAddItem}>
+					<button aria-label="add folder" onClick={handleAddItem}>
 						<AddIcon className="h-[18px]" />
 					</button>
 					<button>
@@ -34,9 +35,7 @@ export const Drawer = () => {
 
 			<div className="flex flex-col gap-1 pt-1 pb-6">
 				{data
-					.sort((a, b) => {
-						return a.type === "file" ? 1 : -1
-					})
+					.sort((a) => (a.type === "file" ? 1 : -1))
 					.map((item) => {
 						return item.type === "file" ? (
 							<DrawerFile key={item.id} {...item} />

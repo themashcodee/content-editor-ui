@@ -24,14 +24,17 @@ export const Header: Component<P> = ({ className, ...props }) => {
 
 			<nav>
 				<ul className="flex items-center gap-5">
-					<li className="flex gap-2 items-center cursor-pointer">
+					<button
+						aria-label="invite team member"
+						className="flex gap-2 items-center cursor-pointer"
+					>
 						<InviterUserIcon className="h-[20px] w-[20px]" />
 						<span>Invite Team Member</span>
-					</li>
+					</button>
 
-					<li className="cursor-pointer">
+					<button aria-label="notifications" className="cursor-pointer">
 						<NotificationIcon className="w-[20px] h-[20px]" />
-					</li>
+					</button>
 
 					<Profile />
 				</ul>
