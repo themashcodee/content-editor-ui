@@ -24,6 +24,8 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 	function handleAddFile() {
 		const name = prompt("File Name")
 		if (!name) return toast.error("File name is required")
+		if (name.length > 20)
+			return toast.error("File name should be less than 20 characters")
 		const errorMessage = addItem({ parentId: id, name, type: "file" })
 		if (errorMessage) return toast.error(errorMessage)
 		setShowChildren(true)
@@ -31,22 +33,28 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 	function handleAddFolder() {
 		const name = prompt("Folder Name")
 		if (!name) return toast.error("Folder name is required")
+		if (name.length > 20)
+			return toast.error("Folder name should be less than 20 characters")
 		const errorMessage = addItem({ parentId: id, name, type: "folder" })
 		if (errorMessage) return toast.error(errorMessage)
 		setShowChildren(true)
 	}
 
 	return (
-		<div>
-			<div className="flex justify-between h-8 items-center gap-8 px-4">
+		<div className="flex flex-col">
+			<div className="flex justify-between h-8 items-center gap-4 px-4 z-[1] relative">
 				<span
-					className="flex items-center cursor-pointer"
+					className="absolute right-0 top-0 hover:bg-gray-200 w-96 h-8 z-[-1] cursor-pointer"
 					onClick={handleToggleChildren}
-				>
+				></span>
+
+				<span className="flex items-center cursor-pointer overflow-hidden pointer-events-none">
 					<DownArrowIcon
-						className={`h-[14px] ${showChildren ? "" : "transform -rotate-90"}`}
+						className={`h-[14px] flex-shrink-0 ${
+							showChildren ? "" : "transform -rotate-90"
+						}`}
 					/>
-					<span>{name}</span>
+					<span className="text-ellipsis overflow-hidden">{name}</span>
 				</span>
 
 				<div className="flex items-center gap-4">
@@ -63,7 +71,7 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 			</div>
 
 			{showChildren && (
-				<div className="pl-4">
+				<div className="pl-8">
 					{children
 						.sort((a) => (a.type === "file" ? 1 : -1))
 						.map((item) => {

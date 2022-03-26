@@ -5,8 +5,11 @@ type P = File
 
 export const DrawerFile: NamedExoticComponent<P> = memo(({ name }) => {
 	return (
-		<div className="flex justify-between h-8 items-center gap-8 px-10">
-			{name}
+		<div className="flex h-8 items-center px-6 relative cursor-pointer z-[1]">
+			<span className="text-ellipsis overflow-hidden pointer-events-none">
+				{name}
+			</span>
+			<span className="absolute right-0 top-0 hover:bg-gray-200 w-96 h-8 z-[-1]"></span>
 		</div>
 	)
 })
