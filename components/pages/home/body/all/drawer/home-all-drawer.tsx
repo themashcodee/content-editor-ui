@@ -4,6 +4,7 @@ import { DrawerFolder } from "../folder"
 import { DrawerFile } from "../file"
 import { useDrawer } from "hooks"
 import toast from "react-hot-toast"
+import { Tooltip } from "components/core"
 
 export const Drawer = () => {
 	const { data, addItem } = useDrawer()
@@ -21,9 +22,11 @@ export const Drawer = () => {
 				<h3 className="font-semibold text-[#555]">FILES</h3>
 
 				<div className="flex items-center gap-4">
-					<button aria-label="add folder" onClick={handleAddItem}>
-						<AddIcon className="h-[18px]" />
-					</button>
+					<Tooltip content="Add folder" direction="bottom">
+						<button aria-label="add folder" onClick={handleAddItem}>
+							<AddIcon className="h-[18px]" />
+						</button>
+					</Tooltip>
 					<button>
 						<ExpandIcon className="h-[18px]" />
 					</button>

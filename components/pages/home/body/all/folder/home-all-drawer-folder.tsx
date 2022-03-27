@@ -10,6 +10,7 @@ import { DrawerFile } from "../file"
 import { AddItemParams } from "hooks"
 import toast from "react-hot-toast"
 import { Component } from "types/common"
+import { Tooltip } from "components/core"
 
 type P = Folder & {
 	addItem: ({ name, parentId, type }: AddItemParams) => string | undefined
@@ -58,15 +59,22 @@ export const DrawerFolder: Component<P> = ({ addItem, children, id, name }) => {
 				</span>
 
 				<div className="flex items-center gap-4">
-					<button aria-label="add file" onClick={handleAddFile}>
-						<AddIcon />
-					</button>
-					<button aria-label="add folder" onClick={handleAddFolder}>
-						<AddFilledIcon />
-					</button>
-					<button aria-label="folder options">
-						<DotMenuIcon />
-					</button>
+					<Tooltip content="Add file">
+						<button aria-label="add file" onClick={handleAddFile}>
+							<AddIcon />
+						</button>
+					</Tooltip>
+
+					<Tooltip content="Add folder">
+						<button aria-label="add folder" onClick={handleAddFolder}>
+							<AddFilledIcon />
+						</button>
+					</Tooltip>
+					<Tooltip direction="left" content="Folder options">
+						<button aria-label="folder options">
+							<DotMenuIcon />
+						</button>
+					</Tooltip>
 				</div>
 			</div>
 
