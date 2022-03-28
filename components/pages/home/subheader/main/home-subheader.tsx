@@ -10,7 +10,7 @@ export const Subheader = () => {
 	const [selectedTab, setSelectedTab] = useRecoilState(TabAtom)
 
 	return (
-		<div className="flex px-8 h-12 shadow-sm">
+		<div className="flex px-8 h-12 shadow-sm border-b border-[#eee]">
 			<div className="flex z-30">
 				<Tab
 					value="all"

@@ -17,7 +17,7 @@ export const Drawer = () => {
 	}
 
 	return (
-		<aside className="flex flex-col w-96 bg-[#fbfbfb] h-full overflow-auto select-none">
+		<aside className="flex flex-col w-96 bg-[#fbfbfb] h-full overflow-auto select-none flex-shrink-0">
 			<div className="flex justify-between h-16 items-center gap-8 px-6 flex-shrink-0">
 				<h3 className="font-semibold text-[#555]">FILES</h3>
 

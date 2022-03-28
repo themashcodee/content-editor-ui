@@ -17,13 +17,13 @@ export const Tooltip: Component<P> = ({
 	const style = twMerge(
 		"group-hover:flex bg-gray-900 text-white shadow-md justify-center px-2 py-1 rounded-md hidden absolute whitespace-nowrap transform z-[100] before:absolute before:w-3 before:h-3 before:rotate-45 before:transform before:bg-inherit",
 		direction === "top" &&
-			`bottom-[180%] before:top-[calc(100%-6px)] before:left-1/2 before:-translate-x-1/2  left-1/2 -translate-x-1/2`,
+			`bottom-[calc(100%+15px)] before:top-[calc(100%-6px)] before:left-1/2 before:-translate-x-1/2  left-1/2 -translate-x-1/2`,
 		direction === "bottom" &&
-			`top-[180%] before:bottom-[calc(100%-6px)] before:left-1/2 before:-translate-x-1/2  left-1/2 -translate-x-1/2`,
+			`top-[calc(100%+15px)] before:bottom-[calc(100%-6px)] before:left-1/2 before:-translate-x-1/2  left-1/2 -translate-x-1/2`,
 		direction === "left" &&
-			`top-[50%] right-[180%] -translate-y-1/2 before:top-[50%] before:left-[calc(100%-6px)] before:-translate-y-1/2`,
+			`top-[50%] right-[calc(100%+15px)] -translate-y-1/2 before:top-[50%] before:left-[calc(100%-6px)] before:-translate-y-1/2`,
 		direction === "right" &&
-			`top-[50%] left-[180%] -translate-y-1/2 before:top-[50%] before:right-[calc(100%-6px)] before:-translate-y-1/2`,
+			`top-[50%] left-[calc(100%+15px)] -translate-y-1/2 before:top-[50%] before:right-[calc(100%-6px)] before:-translate-y-1/2`,
 		className
 	)
 
