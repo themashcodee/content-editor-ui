@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { File, Folder } from "types/drawer"
 import { findFolder } from "helpers"
 import { nanoid } from "nanoid"
@@ -12,13 +12,29 @@ export type AddItemParams = {
 export function useDrawer() {
 	const [data, setData] = useState<(File | Folder)[]>([])
 
+	useEffect(() => {
+		const savedDrawerData = localStorage.getItem("drawer")
+		if (savedDrawerData) {
+			setData(JSON.parse(savedDrawerData))
+		}
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem("drawer", JSON.stringify(data))
+	}, [data])
+
+	const clearDrawer = () => {
+		localStorage.removeItem("drawer")
+		setData([])
+	}
+
 	const addItem = ({ name, parentId, type }: AddItemParams) => {
 		if (!name.match(/^[a-zA-Zа-яА-Я0-9-_!]+$/)) return `Invalid ${type} name`
 
 		const itemId = nanoid()
 		const itemToAdd =
 			type === "file"
-				? { type, name, id: itemId, content: "<h1>Welcome</h1>" }
+				? { type, name, id: itemId }
 				: { type, name, id: itemId, children: [] }
 
 		const newData = [...data]
@@ -41,5 +57,5 @@ export function useDrawer() {
 		setData(newData)
 	}
 
-	return { data, addItem }
+	return { data, addItem, clearDrawer }
 }

@@ -1,5 +1,10 @@
 import React, { MouseEvent } from "react"
-import { AddIcon, ExpandIcon, LeftDoubleArrowIcon } from "components/icons"
+import {
+	AddIcon,
+	ExpandIcon,
+	LeftDoubleArrowIcon,
+	TrashIcon,
+} from "components/icons"
 import { DrawerFolder } from "../folder"
 import { DrawerFile } from "../file"
 import { useDrawer } from "hooks"
@@ -7,7 +12,7 @@ import toast from "react-hot-toast"
 import { Tooltip } from "components/core"
 
 export const Drawer = () => {
-	const { data, addItem } = useDrawer()
+	const { data, addItem, clearDrawer } = useDrawer()
 
 	function handleAddItem(e: MouseEvent<HTMLButtonElement>) {
 		const name = prompt("Folder Name")
@@ -33,6 +38,12 @@ export const Drawer = () => {
 					<button>
 						<LeftDoubleArrowIcon className="h-[18px]" />
 					</button>
+
+					<Tooltip content="Delete Everything" direction="left">
+						<button onClick={clearDrawer}>
+							<TrashIcon className="h-[18px]" />
+						</button>
+					</Tooltip>
 				</div>
 			</div>
 
