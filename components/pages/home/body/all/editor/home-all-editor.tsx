@@ -9,7 +9,8 @@ export const Editor = () => {
 	const editor = useEditor({
 		editorProps: {
 			attributes: {
-				class: "w-full h-full outline-none p-8",
+				class:
+					"w-full h-full outline-none p-8 prose prose-sm sm:prose lg:prose-lg xl:prose-2xl focus:outline-none",
 			},
 		},
 		extensions: [StarterKit],
