@@ -28,6 +28,7 @@ export function useDrawer() {
 
 	const clearDrawer = () => {
 		localStorage.removeItem("drawer")
+		localStorage.removeItem("savedContent")
 		setData([])
 		setSelectedFile(null)
 	}
