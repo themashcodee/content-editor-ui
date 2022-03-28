@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { File, Folder } from "types/drawer"
 import { findFolder } from "helpers"
 import { nanoid } from "nanoid"
+import { useSetRecoilState } from "recoil"
+import { SelectedFileAtom } from "store"
 
 export type AddItemParams = {
 	parentId: string
@@ -11,6 +13,7 @@ export type AddItemParams = {
 
 export function useDrawer() {
 	const [data, setData] = useState<(File | Folder)[]>([])
+	const setSelectedFile = useSetRecoilState(SelectedFileAtom)
 
 	useEffect(() => {
 		const savedDrawerData = localStorage.getItem("drawer")
@@ -26,6 +29,7 @@ export function useDrawer() {
 	const clearDrawer = () => {
 		localStorage.removeItem("drawer")
 		setData([])
+		setSelectedFile(null)
 	}
 
 	const addItem = ({ name, parentId, type }: AddItemParams) => {
