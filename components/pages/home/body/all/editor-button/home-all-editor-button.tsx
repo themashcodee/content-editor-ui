@@ -28,7 +28,7 @@ export const EditorButton: Component<P> = ({
 	)
 
 	return (
-		<Tooltip content={ariaLabel} direction="bottom">
+		<Tooltip content={ariaLabel}>
 			<button
 				onClick={handleClick}
 				aria-label={ariaLabel}

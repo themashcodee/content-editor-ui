@@ -4,16 +4,26 @@ import StarterKit from "@tiptap/starter-kit"
 import { EditorToolbar } from "../editor-toolbar"
 import { useRecoilValue } from "recoil"
 import { SelectedFileAtom } from "store"
+import Highlight from "@tiptap/extension-highlight"
+import TaskList from "@tiptap/extension-task-list"
+import TaskItem from "@tiptap/extension-task-item"
 
 export const Editor = () => {
 	const editor = useEditor({
 		editorProps: {
 			attributes: {
 				class:
-					"w-full h-full outline-none p-8 prose prose-sm sm:prose lg:prose-lg xl:prose-2xl focus:outline-none",
+					"w-full h-full outline-none p-8 prose prose-sm sm:prose lg:prose xl:prose-lg focus:outline-none",
 			},
 		},
-		extensions: [StarterKit],
+		extensions: [
+			StarterKit,
+			Highlight.configure({
+				multicolor: true,
+			}),
+			TaskItem,
+			TaskList,
+		],
 		content: "",
 		autofocus: true,
 		onUpdate: () => {
@@ -55,9 +65,9 @@ export const Editor = () => {
 			{selectedFile && (
 				<div className="h-full w-full flex flex-col p-8 gap-8 bg-white border-l border-[#eee] overflow-hidden">
 					{editor && (
-						<section className="flex flex-col gap-2 w-full">
-							<div className="flex justify-between items-center py-2 gap-4">
-								<h2 className="font-semibold">
+						<section className="flex flex-col gap-4 w-full">
+							<div className="flex justify-between items-center gap-4">
+								<h2 className="font-semibold text-xl">
 									{`File name - ${selectedFile.name.toUpperCase()} ${
 										saved ? "" : "(unsaved)"
 									}`}

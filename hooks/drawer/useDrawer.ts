@@ -17,13 +17,30 @@ export function useDrawer() {
 
 	useEffect(() => {
 		const savedDrawerData = localStorage.getItem("drawer")
+
 		if (savedDrawerData) {
 			setData(JSON.parse(savedDrawerData))
+		} else {
+			// SETTING SAMPLE DRAWER DATA
+			localStorage.setItem(
+				"drawer",
+				'[{"type":"folder","name":"LRNR","id":"34fnN3vy7GkMtiPi4fUn4","children":[{"type":"file","name":"sample","id":"I7s9co-0v-ys7JZ6HPt3e"}]}]'
+			)
+			setData(
+				JSON.parse(
+					'[{"type":"folder","name":"LRNR","id":"34fnN3vy7GkMtiPi4fUn4","children":[{"type":"file","name":"sample","id":"I7s9co-0v-ys7JZ6HPt3e"}]}]'
+				)
+			)
+			// SETTING SAMPLE EDITOR DATA
+			localStorage.setItem(
+				"savedContent",
+				'{"I7s9co-0v-ys7JZ6HPt3e":"<h2>Hello Welcome to the Application Sample Document</h2><p>I am <strong>Bold <em>Italic <s>Striked</s></em></strong> and I am <mark data-color=\\"#fbbc88\\" style=\\"background-color: #fbbc88\\">Highlighted</mark></p><blockquote><p>I am Quoted</p></blockquote><pre><code>I am Code Block</code></pre><ul><li><p>Unordered List Item 1</p></li><li><p>Unordered List Item 2</p></li></ul><ol><li><p>Ordered List Item 1</p></li></ol><ul data-type=\\"taskList\\"><li data-checked=\\"false\\" data-type=\\"taskItem\\"><label><input type=\\"checkbox\\"><span></span></label><div><p>Task List Item 1 (weird styling because of tailwind typography 😂) anyways it can be fixed, duh!</p></div></li></ul><hr><p>Above is a Horizontal Rule</p>"}'
+			)
 		}
 	}, [])
 
 	useEffect(() => {
-		localStorage.setItem("drawer", JSON.stringify(data))
+		if (data.length) localStorage.setItem("drawer", JSON.stringify(data))
 	}, [data])
 
 	const clearDrawer = () => {
